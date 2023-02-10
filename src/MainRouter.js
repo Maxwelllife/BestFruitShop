@@ -11,8 +11,8 @@ import LoginScreen from "./Screens/auth/LoginScreen";
 import TabBarRouter from "./TabBarRouter";
 
 import { useDispatch, useSelector } from "react-redux";
-// import { getCurrentUser } from "../redux/auth/auth-operations";
-// import { getAuthStore } from "../redux/auth/auth-selectors";
+import { getCurrentUser } from "./redux/auth/auth-operations";
+import { getAuthStore } from "./redux/auth/auth-selectors";
 
 const StartStack = createStackNavigator();
 const UserStack = createStackNavigator();
@@ -20,36 +20,26 @@ const UserStack = createStackNavigator();
 const MainRouter = () => {
     const navigationRef = useNavigationContainerRef();
 
-    // const { userId } = useSelector(getAuthStore);
-    // const dispatch = useDispatch();
+    const { userId } = useSelector(getAuthStore);
+    const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (userId === null) {
-    //         dispatch(getCurrentUser());
-    //     }
+    useEffect(() => {
+        if (userId === null) {
+            dispatch(getCurrentUser());
+        }
 
-    //     navigationRef.navigate(userId ? "Home" : "Preview");
-    // }, [userId]);
-    const isAuth = false;
+        navigationRef.navigate(userId ? "TabRouter" : "Preview");
+        // navigationRef.navigate(userId ? "Preview" : "TabRouter");
+    }, [userId]);
+
     return (
         <NavigationContainer ref={navigationRef}>
-            {isAuth ? (
-                <UserStack.Navigator screenOptions={{ headerShown: false }}>
-                    <UserStack.Screen name="Default" component={TabBarRouter} />
-                </UserStack.Navigator>
-            ) : (
-                <StartStack.Navigator screenOptions={{ headerShown: false }}>
-                    <StartStack.Screen
-                        name="Preview"
-                        component={PreviewScreen}
-                    />
-                    <StartStack.Screen
-                        name="Register"
-                        component={RegisterScreen}
-                    />
-                    <StartStack.Screen name="Login" component={LoginScreen} />
-                </StartStack.Navigator>
-            )}
+            <StartStack.Navigator screenOptions={{ headerShown: false }}>
+                <StartStack.Screen name="Preview" component={PreviewScreen} />
+                <StartStack.Screen name="Register" component={RegisterScreen} />
+                <StartStack.Screen name="Login" component={LoginScreen} />
+                <UserStack.Screen name="TabRouter" component={TabBarRouter} />
+            </StartStack.Navigator>
         </NavigationContainer>
     );
 };

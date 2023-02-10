@@ -1,0 +1,55 @@
+export default [
+    {
+        id: 1,
+        image: require("../../../assets/png/pineApple.png"),
+        title: "Pineapple",
+        price: "$955 US",
+        popular: true,
+    },
+    {
+        id: 2,
+        image: require("../../../assets/png/banana.png"),
+        title: "Banana",
+        price: "$955 US",
+        popular: true,
+        bestSeller: true,
+    },
+    {
+        id: 3,
+        image: require("../../../assets/png/greenGrapes.png"),
+        title: "Green Grapes",
+        price: "$998 US",
+        bestSeller: true,
+    },
+    {
+        id: 4,
+        image: require("../../../assets/png/grapes.png"),
+        title: "Grapes",
+        price: "$998 US",
+        bestSeller: true,
+    },
+    {
+        id: 5,
+        image: require("../../../assets/png/melon.png"),
+        title: "Melon",
+        price: "$998 US",
+    },
+    {
+        id: 6,
+        image: require("../../../assets/png/mango.png"),
+        title: "Mango",
+        price: "$998 US",
+    },
+    {
+        id: 7,
+        image: require("../../../assets/png/guava.png"),
+        title: "Guava",
+        price: "$998 US",
+    },
+    {
+        id: 8,
+        image: require("../../../assets/png/gragonFruit.png"),
+        title: "Dragon Fruit",
+        price: "$998 US",
+    },
+];

@@ -5,10 +5,11 @@ import {
     Image,
     useWindowDimensions,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const PreviewItem = ({ item }) => {
     const { width } = useWindowDimensions();
+
     return (
         <View style={[s.container, { width }]}>
             {/* <View style={{...s.container, width} }> */}
@@ -16,7 +17,7 @@ const PreviewItem = ({ item }) => {
                 source={item.image}
                 style={[s.img, { width, resizeMode: "contain" }]}
             />
-            <View>
+            <View style={s.wrap}>
                 <Text style={s.title}>{item.title}</Text>
                 <Text style={s.description}>{item.description}</Text>
             </View>
@@ -40,6 +41,9 @@ const s = StyleSheet.create({
         height: 265,
         borderRadius: 30,
     },
+    wrap: {
+        alignItems: "center",
+    },
     title: {
         marginTop: 32,
         fontFamily: "Montserrat-Bold",
@@ -50,6 +54,5 @@ const s = StyleSheet.create({
         marginTop: 32,
         width: 170,
         textAlign: "center",
-        fontFamily: "",
     },
 });

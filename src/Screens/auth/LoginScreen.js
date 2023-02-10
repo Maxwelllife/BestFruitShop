@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { login } from "../../redux/auth/auth-operations";
+import { login } from "../../redux/auth/auth-operations";
 
 import {
     StyleSheet,
@@ -136,8 +136,7 @@ const s = StyleSheet.create({
     },
     form: {
         paddingTop: 121,
-        paddingLeft: 30,
-        paddingRight: 30,
+        paddingHorizontal: 30,
         backgroundColor: "#FFFFFF",
     },
     input: {

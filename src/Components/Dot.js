@@ -1,15 +1,15 @@
 import * as React from "react";
 import Svg, { Circle } from "react-native-svg";
 
-const Dot = (props) => (
+const Dot = ({ size, color }) => (
     <Svg
-        width={16}
-        height={16}
-        fill="none"
+        width={46}
+        height={46}
+        // fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        {...props}
+        // {...props}
     >
-        <Circle cx={8} cy={8} r={8} fill="#C4C4C4" />
+        <Circle cx={23} cy={23} r={size} fill={color} />
     </Svg>
 );
 

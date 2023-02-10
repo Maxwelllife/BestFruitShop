@@ -12,15 +12,16 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
     useWindowDimensions,
+    Alert,
 } from "react-native";
 
-// import { register } from "../../redux/auth/auth-operations";
+import { register } from "../../redux/auth/auth-operations";
 
 const initialState = {
-    login: "",
+    // login: "",
     email: "",
     password: "",
-    avatarURL: null,
+    confirmPassword: "",
 };
 
 export default function RegisterScreen({ navigation }) {
@@ -32,8 +33,14 @@ export default function RegisterScreen({ navigation }) {
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
-        dispatch(register(state));
-        setState(initialState);
+        if (state.password === state.confirmPassword) {
+            console.log("state.confirmPassword: ", state.confirmPassword);
+            console.log("state.password : ", state.password);
+            dispatch(register(state));
+            setState(initialState);
+        } else {
+            Alert.alert("Password is not confirm");
+        }
     };
 
     const keyboardHide = () => {
@@ -74,20 +81,6 @@ export default function RegisterScreen({ navigation }) {
                                 style={s.input}
                                 textAlign={"left"}
                                 placeholder={"Email"}
-                                value={state.login}
-                                onChangeText={(value) =>
-                                    setState((prevState) => ({
-                                        ...prevState,
-                                        login: value,
-                                    }))
-                                }
-                            />
-                        </View>
-                        <View style={{ marginTop: 36 }}>
-                            <TextInput
-                                style={s.input}
-                                textAlign={"left"}
-                                placeholder={"Password"}
                                 value={state.email}
                                 onChangeText={(value) =>
                                     setState((prevState) => ({
@@ -100,8 +93,8 @@ export default function RegisterScreen({ navigation }) {
                         <View style={{ marginTop: 36 }}>
                             <TextInput
                                 style={s.input}
-                                textAlign="left"
-                                placeholder="Confirmation Password"
+                                textAlign={"left"}
+                                placeholder={"Password"}
                                 value={state.password}
                                 onChangeText={(value) =>
                                     setState((prevState) => ({
@@ -109,6 +102,21 @@ export default function RegisterScreen({ navigation }) {
                                         password: value,
                                     }))
                                 }
+                            />
+                        </View>
+                        <View style={{ marginTop: 36 }}>
+                            <TextInput
+                                style={s.input}
+                                textAlign="left"
+                                placeholder="Confirmation Password"
+                                value={state.confirmPassword}
+                                onChangeText={(value) =>
+                                    setState((prevState) => ({
+                                        ...prevState,
+                                        confirmPassword: value,
+                                    }))
+                                }
+                                // validate={[requiredInput]}
                             />
                         </View>
                         <TouchableOpacity
@@ -147,8 +155,7 @@ const s = StyleSheet.create({
 
     form: {
         paddingTop: 121,
-        paddingLeft: 30,
-        paddingRight: 30,
+        paddingHorizontal: 30,
         backgroundColor: "#FFFFFF",
     },
     input: {

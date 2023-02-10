@@ -1,6 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { TouchableOpacity } from "react-native";
 
 import HomeScreen from "./Screens/bottomTabBar/HomeScreen";
 import NotificationsScreen from "./Screens/bottomTabBar/NotificationsScreen";
@@ -16,6 +17,7 @@ import Notifications from "./Components/Notifications";
 import AddButton from "./Components/AddButton";
 
 const Tab = createBottomTabNavigator();
+// createMaterialBottomTabNavigator;
 
 function TabBarRouter() {
     return (
@@ -25,7 +27,14 @@ function TabBarRouter() {
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     height: 99,
-                    // shadowColor: "#222222",
+                    // shadowColor: "#000",
+                    // shadowOffset: {
+                    //     width: 0,
+                    //     height: 12,
+                    // },
+                    // shadowOpacity: 0.58,
+                    // shadowRadius: 16.0,
+                    // elevation: 24,
                 },
             }}
         >
@@ -63,7 +72,6 @@ function TabBarRouter() {
                 options={({ navigation }) => {
                     return {
                         title: "Add fruit",
-
                         tabBarIconStyle: { position: "absolute", top: 15 },
                         tabBarIcon: () => <AddButton />,
                     };
@@ -120,23 +128,5 @@ function TabBarRouter() {
         </Tab.Navigator>
     );
 }
-
-const s = StyleSheet.create({
-    header: {
-        color: "red",
-        padding: 20,
-        alignItems: "center",
-        justifyContent: "flex-end",
-    },
-
-    createBtn: {
-        width: 70,
-        height: 40,
-        backgroundColor: "#FF6C00",
-        borderRadius: 20,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
 
 export default TabBarRouter;

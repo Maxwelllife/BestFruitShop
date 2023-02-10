@@ -10,10 +10,8 @@ import {
     useWindowDimensions,
 } from "react-native";
 import Search from "../../Components/Search";
-import data from "./data.json";
-
-const fruits = data.data;
-
+import fruits from "./data.js";
+let numColumns = 2;
 const HomeScreen = () => {
     const [state, setState] = useState("");
     const { width } = useWindowDimensions();
@@ -33,31 +31,39 @@ const HomeScreen = () => {
                     <Text style={s.title}>BestFruitShop</Text>
                     <Image source={require("../../../assets/png/user.png")} />
                 </View>
-                <TextInput
-                    style={s.input}
-                    textAlign="left"
-                    placeholder="Search"
-                    value={state.email}
-                    onChangeText={(value) =>
-                        setState((prevState) => ({
-                            ...prevState,
-                            email: value,
-                        }))
-                    }
-                    onPress={() => {
-                        handleFilter;
-                    }}
-                />
-                <Search style={s.search} width={25} height={25} />
+                <View style={s.inputWrap}>
+                    <TextInput
+                        style={s.input}
+                        textAlign="left"
+                        placeholder="Search"
+                        value={state.email}
+                        onChangeText={(value) =>
+                            setState((prevState) => ({
+                                ...prevState,
+                                email: value,
+                            }))
+                        }
+                        onPress={() => {
+                            handleFilter;
+                        }}
+                    />
+                    <Search style={s.search} width={25} height={25} />
+                </View>
             </View>
             <FlatList
+                key={2}
+                numColumns={2}
+                contentContainerStyle={s.containerStyle}
                 data={fruits}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <View style={{ ...s.fruitItem, width: (width - 20) / 2 }}>
-                        {/* <Image source={require(item.url)} /> */}
-                        <Text>{item.name}</Text>
-                        <Text>{item.price}</Text>
+                    <View style={{ ...s.fruitItem, width: (width - 80) / 2 }}>
+                        <Image
+                            source={item.image}
+                            style={{ height: 167, marginBottom: -30 }}
+                        />
+                        <Text style={{ paddingBottom: 5 }}>{item.title}</Text>
+                        <Text style={{ paddingBottom: 5 }}>{item.price}</Text>
                     </View>
                 )}
             />
@@ -87,9 +93,11 @@ const s = StyleSheet.create({
         lineHeight: 24,
         color: "#34495E",
     },
-
-    input: {
+    inputWrap: {
         marginTop: 22,
+        marginBottom: 86,
+    },
+    input: {
         paddingLeft: 62,
         padding: 13,
         fontFamily: "Roboto-Regular",
@@ -98,12 +106,39 @@ const s = StyleSheet.create({
         backgroundColor: "#FFF",
         borderRadius: 30,
         color: "#C0C0C0",
-        shadowColor: " #00000040",
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+
+        elevation: 4,
     },
     search: {
         position: "absolute",
         bottom: 15,
         right: 19,
     },
-    fruitItem: {},
+    containerStyle: {
+        margin: -10,
+    },
+    fruitItem: {
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        alignItems: "center",
+        margin: 10,
+        // height: 167,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+
+        elevation: 4,
+    },
 });
